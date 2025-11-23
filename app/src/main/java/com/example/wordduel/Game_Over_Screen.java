@@ -3,6 +3,8 @@ package com.example.wordduel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +27,32 @@ public class Game_Over_Screen extends AppCompatActivity {
 
         // Add button functionality
         setupButtons();
+        
+        // Display results
+        displayResults();
     }
+    
+    private void displayResults() {
+        int myScore = getIntent().getIntExtra("myScore", 0);
+        int opponentScore = getIntent().getIntExtra("opponentScore", 0);
+        String winner = getIntent().getStringExtra("winner");
+        
+        TextView playerScoreText = findViewById(R.id.playerscore);
+        TextView oppScoreText = findViewById(R.id.oppscore);
+        TextView resultText = findViewById(R.id.resultText);
+        
+        playerScoreText.setText(String.valueOf(myScore));
+        oppScoreText.setText(String.valueOf(opponentScore));
+        
+        if ("Me".equals(winner)) {
+            resultText.setText("You Win");
+        } else if ("Opponent".equals(winner)) {
+            resultText.setText("You Lose");
+        } else {
+            resultText.setText("Game Over");
+        }
+    }
+
 
     private void setupButtons() {
         // MENU Button - Goes back to MainActivity

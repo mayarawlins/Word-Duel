@@ -36,7 +36,14 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0); // Fully exit the app
         });
 
-// New Game Button - Goes to new activity
+        // High Score Button - Goes to HighScoreActivity
+        Button highScoreButton = findViewById(R.id.highScore);
+        highScoreButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HighScore.class);
+            startActivity(intent);
+        });
+
+        // New Game Button - Goes to new activity
         Button newGameButton = findViewById(R.id.newgame);
         newGameButton.setOnClickListener(v -> {
             // Create intent to start NewGameActivity

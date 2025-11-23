@@ -3,6 +3,7 @@ package com.example.wordduel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class GameSetup extends AppCompatActivity {
+
+    EditText opponentNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class GameSetup extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        opponentNumber = findViewById(R.id.editTextPhone);
 
         // Add button functionality
         setupButtons();
@@ -37,7 +42,30 @@ public class GameSetup extends AppCompatActivity {
         // START Button - Goes to ActiveGameScreen
         Button startButton = findViewById(R.id.start);
         startButton.setOnClickListener(v -> {
+            String number = opponentNumber.getText().toString().trim();
+
+            if (number.isEmpty()) {
+                opponentNumber.setError("Please enter a phone number");
+                return;
+            }
+
             Intent intent = new Intent(GameSetup.this, ActiveGameScreen.class);
+            intent.putExtra("opponentPhone", number);
+            startActivity(intent);
+        });
+
+        // JOIN Button - Goes to JoinMatchScreen
+        Button joinButton = findViewById(R.id.join);
+        joinButton.setOnClickListener(v -> {
+            String number = opponentNumber.getText().toString().trim();
+
+            if (number.isEmpty()) {
+                opponentNumber.setError("Please enter a phone number");
+                return;
+            }
+
+            Intent intent = new Intent(GameSetup.this, JoinMatchScreen.class);
+            intent.putExtra("opponentPhone", number);
             startActivity(intent);
         });
     }
