@@ -338,6 +338,7 @@ public class ActiveGameScreen extends AppCompatActivity {
         wordInput.setText("");
         sendWordButton.setText("Send Word");
         sendWordButton.setEnabled(true);
+        sendWordButton.setOnClickListener(v -> sendMove());
         
         startTurnTimer();
 
